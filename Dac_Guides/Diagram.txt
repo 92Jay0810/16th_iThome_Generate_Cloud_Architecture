@@ -1,0 +1,71 @@
+Paragraph: Diagram is a primary object representing a diagram.
+Paragraph: Diagram represents a global diagram context.
+Paragraph: You can create a diagram context with Diagram class. The first parameter of Diagram constructor will be used for output filename.
+Code Block:
+ from diagrams import Diagram
+from diagrams.aws.compute import EC2
+
+with Diagram("Simple Diagram"):
+    EC2("web")
+
+Paragraph: And if you run the above script with below command,
+Code Block:
+ $ python diagram.py
+
+Paragraph: It will generate an image file with single EC2 node drawn as simple_diagram.png on your working directory, and open that created image 
+file immediately.
+Paragraph: Diagrams can be also rendered directly inside the notebook as like this:
+Code Block:
+ from diagrams import Diagram
+from diagrams.aws.compute import EC2
+
+with Diagram("Simple Diagram") as diag:
+    EC2("web")
+diag
+
+Paragraph: You can specify the output file format with outformat parameter. Default is png.
+Paragraph: (png, jpg, svg, pdf and dot) are allowed.
+Code Block:
+ from diagrams import Diagram
+from diagrams.aws.compute import EC2
+
+with Diagram("Simple Diagram", outformat="jpg"):
+    EC2("web")
+
+Paragraph: The outformat parameter also support list to output all the defined output in one call.
+Code Block:
+ from diagrams import Diagram
+from diagrams.aws.compute import EC2
+
+with Diagram("Simple Diagram Multi Output", outformat=["jpg", "png", "dot"]):
+    EC2("web")
+
+Paragraph: You can specify the output filename with filename parameter. The extension shouldn't be included, it's determined by the outformat parameter.
+Code Block:
+ from diagrams import Diagram
+from diagrams.aws.compute import EC2
+
+with Diagram("Simple Diagram", filename="my_diagram"):
+    EC2("web")
+
+Paragraph: You can also disable the automatic file opening by setting the show parameter as false. Default is true.
+Code Block:
+ from diagrams import Diagram
+from diagrams.aws.compute import EC2
+
+with Diagram("Simple Diagram", show=False):
+    EC2("web")
+
+Paragraph: It allows custom Graphviz dot attributes options.
+Paragraph: graph_attr, node_attr and edge_attr are supported. Here is a reference link.
+Code Block:
+ from diagrams import Diagram
+from diagrams.aws.compute import EC2
+
+graph_attr = {
+    "fontsize": "45",
+    "bgcolor": "transparent"
+}
+
+with Diagram("Simple Diagram", show=False, graph_attr=graph_attr):
+    EC2("web")
